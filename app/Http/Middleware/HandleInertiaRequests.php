@@ -32,12 +32,17 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                // We use optional() or ? to prevent errors if the user is logged out
+                'user' => $request->user() ? [
+                    'id' => $request->user()->id,
+                    'name' => $request->user()->name,
+                    'email' => $request->user()->email,
+                    'role' => $request->user()->role ? $request->user()->role->name : null,
+                ] : null,
             ],
-            // Añadimos esto para que props.flash funcione en React
             'flash' => [
                 'openModal' => $request->session()->get('openModal'),
-                'message'   => $request->session()->get('message'), // Opcional, para notificaciones
+                'message'   => $request->session()->get('message'),
             ],
         ];
     }

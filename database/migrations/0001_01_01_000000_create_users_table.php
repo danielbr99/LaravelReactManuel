@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignId('role_id')->constrained();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -34,6 +35,12 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name'); 
+            $table->timestamps();
         });
     }
 

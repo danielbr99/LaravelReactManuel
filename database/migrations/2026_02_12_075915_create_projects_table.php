@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // Cambiado de title a name
+            $table->string('name'); 
             $table->text('description');
-            $table->integer('hours'); // Nuevo campo: horas
-            $table->date('start_date'); // Nuevo campo: fecha de comienzo
+            $table->integer('hours'); 
+            $table->date('start_date'); 
             $table->timestamps();
         });
     }

@@ -47,7 +47,11 @@ export default function ProjectCard({ project }) {
                         </div>
                     </div>
 
-                    {auth.user.id === project.user_id && (
+                    {(
+                        auth.user.role === 'admin' || 
+                        auth.user.id === project.user_id || 
+                        (auth.user.role === 'manager' && project.user.role.name === 'user')
+                    ) && (
                         <Link
                             href={route('projects.destroy', project.id)}
                             method="delete"

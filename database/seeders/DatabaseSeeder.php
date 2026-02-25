@@ -16,15 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // First, run your RoleSeeder to make sure roles exist
         $this->call(RoleSeeder::class);
 
-        // Get the roles from the DB
         $adminRole = Role::where('name', 'admin')->first();
         $managerRole = Role::where('name', 'manager')->first();
         $userRole = Role::where('name', 'user')->first();
 
-        // Create an Admin user
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
@@ -39,7 +36,6 @@ class DatabaseSeeder extends Seeder
             'role_id' => $managerRole->id,
         ]);
 
-        // Create a regular User
         User::factory()->create([
             'name' => 'Regular User',
             'email' => 'user@example.com',
